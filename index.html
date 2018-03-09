@@ -9,7 +9,14 @@
 
 <label>Nombre</label>
 
-<input id="nombre" type="text"  value="" onkeyup="this.value=letras(this.value)"/>
+<input id="nombre" type="text"  value="" onkeyup="this.value=filtro(this.value, 'letras')"/>
+
+<br>
+<br>
+
+<label>Direccion</label>
+
+<input id="direccion" type="text"  value="" onkeyup="this.value=filtro(this.value, 'letrasNumeros')" />
 
 <script type="text/javascript">
 	
@@ -17,11 +24,25 @@
 		document.getElementById('nombre').onpaste = function(e) {
 			e.preventDefault();
 		}
+		document.getElementById('direccion').onpaste = function(e) {
+			e.preventDefault();
+		}
 	}
 
-	function letras(string){
+	function filtro(string, tipo){
+
+		var filtro = '';
+
+		switch(tipo){
+			case 'letras': 
+			filtro = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ';
+			break;
+			case 'letrasNumeros': 
+			filtro = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789';
+			break;
+		}
+	    
 	    var out = '';
-	    var filtro = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ';
 		
 	    for (var i=0; i<string.length; i++)
 	       if (filtro.indexOf(string.charAt(i)) != -1) 
