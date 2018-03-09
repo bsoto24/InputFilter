@@ -9,7 +9,7 @@
 
 <label>Nombre</label>
 
-<input id="nombre" type="text"  value="" onkeyup="this.value=filtro(this.value, 'letras')"/>
+<input id="nombre" type="text"  value="" onkeyup="this.value=filtro(this.value, 'letras')" onpaste="disablePaste()"/>
 
 <br>
 <br>
@@ -19,14 +19,16 @@
 <input id="direccion" type="text"  value="" onkeyup="this.value=filtro(this.value, 'letrasNumeros')" />
 
 <script type="text/javascript">
-	
-	window.onload = function() {
-		document.getElementById('nombre').onpaste = function(e) {
-			e.preventDefault();
-		}
-		document.getElementById('direccion').onpaste = function(e) {
-			e.preventDefault();
-		}
+
+	$(document).ready(function () {
+		disablePaste('#nombre');
+		disablePaste('#direccion'); 
+	});
+
+	function disablePaste(input){
+		$(input).bind('copy paste', function (e) {
+	       e.preventDefault();
+	    });
 	}
 
 	function filtro(string, tipo){
